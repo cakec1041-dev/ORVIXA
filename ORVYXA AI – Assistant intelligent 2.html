@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ORVYXA AI – Assistant intelligent</title>
+<meta name="theme-color" content="#3d4bff">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="ORVYXA AI">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<script>
+(function(){
+function icon(n){var c=document.createElement('canvas');c.width=c.height=n;var x=c.getContext('2d'),k=n/32;
+x.fillStyle='#3d4bff';x.fillRect(0,0,n,n);x.strokeStyle='#fff';x.fillStyle='#fff';x.lineWidth=3.8*k;x.lineCap='round';x.lineJoin='round';
+x.beginPath();x.moveTo(9*k,10*k);x.lineTo(16*k,23*k);x.lineTo(23*k,10*k);x.stroke();x.beginPath();x.arc(24*k,8*k,2.6*k,0,Math.PI*2);x.fill();return c.toDataURL('image/png')}
+try{
+var a=document.createElement('link');a.rel='apple-touch-icon';a.href=icon(180);document.head.appendChild(a);
+var m={name:'ORVYXA AI',short_name:'ORVYXA',lang:'fr',display:'standalone',start_url:location.href.split('#')[0],background_color:'#eef0fa',theme_color:'#3d4bff',icons:[{src:icon(192),sizes:'192x192',type:'image/png'},{src:icon(512),sizes:'512x512',type:'image/png'}]};
+var l=document.createElement('link');l.rel='manifest';l.href=URL.createObjectURL(new Blob([JSON.stringify(m)],{type:'application/manifest+json'}));document.head.appendChild(l);
+}catch(e){}
+})();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#eef0fa;--ink:#171a38;--mute:#5a5f86;--card:#ffffff;--line:#d5d9f0;--acc:#3d4bff;--acc-ink:#fff;--bot:#e4e7fb;--user:#3d4bff;--user-ink:#fff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#12142b;--ink:#eceefe;--mute:#9aa0cf;--card:#1b1e3d;--line:#2d3160;--acc:#7b86ff;--acc-ink:#0f1128;--bot:#262a52;--user:#7b86ff;--user-ink:#0f1128}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#12142b;--ink:#eceefe;--mute:#9aa0cf;--card:#1b1e3d;--line:#2d3160;--acc:#7b86ff;--acc-ink:#0f1128;--bot:#262a52;--user:#7b86ff;--user-ink:#0f1128}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Instrument Sans",system-ui,sans-serif;line-height:1.6}
+h1,h2,.logo{font-family:"Bricolage Grotesque","Instrument Sans",system-ui,sans-serif;letter-spacing:-.02em}
+.wrap{max-width:1080px;margin:0 auto;padding:20px}
+header{display:flex;justify-content:space-between;align-items:center;padding:8px 0 28px}
+.logo{font-weight:800;font-size:1.25rem}
+.logo{display:flex;align-items:center}.logo svg{width:30px;height:30px;margin-right:10px}
+.art{display:block;margin-top:32px;width:100%;max-width:460px;height:auto}
+[hidden]{display:none!important}
+.photo{margin:20px 0 0;max-width:460px}.photo img{width:100%;border-radius:16px;display:block}
+#addPhoto{margin-top:16px}
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+h1{font-size:clamp(2.2rem,5vw,3.6rem);line-height:1.05;margin:0 0 18px;font-weight:800}
+.lead{font-size:1.1rem;color:var(--mute);max-width:46ch;margin:0 0 22px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:8px 14px;font:inherit;font-size:.92rem;cursor:pointer}
+.chip:hover{border-color:var(--acc)}
+.chat{background:var(--card);border:1px solid var(--line);border-radius:20px;display:flex;flex-direction:column;height:min(560px,75vh);overflow:hidden}
+.msgs{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:10px}
+.m{max-width:85%;padding:10px 14px;border-radius:16px;white-space:pre-wrap;overflow-wrap:anywhere}
+.m.bot{background:var(--bot);border-bottom-left-radius:4px;align-self:flex-start}
+.m.user{background:var(--user);color:var(--user-ink);border-bottom-right-radius:4px;align-self:flex-end}
+.bar{display:flex;gap:8px;padding:12px;border-top:1px solid var(--line)}
+.bar input{flex:1;min-width:0;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:12px;padding:12px 14px;font:inherit;font-size:1rem}
+.bar button{border:0;background:var(--acc);color:var(--acc-ink);border-radius:12px;padding:0 18px;font:inherit;font-weight:600;cursor:pointer}
+.bar button:disabled{opacity:.5}
+.bar .att{background:var(--bg);color:var(--ink);border:1px solid var(--line);padding:0 14px;font-size:1.4rem;font-weight:500}
+.pv{display:flex;align-items:center;gap:10px;padding:10px 12px 0}.pv img{height:52px;border-radius:8px}
+.chat.drag{outline:2px dashed var(--acc);outline-offset:-6px}
+.m img{display:block;max-width:100%;max-height:180px;border-radius:10px;margin-bottom:6px}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.feat{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:64px;padding-top:28px;border-top:1px solid var(--line)}
+.feat h2{font-size:1.15rem;margin:0 0 6px}
+.feat p{margin:0;color:var(--mute)}
+footer{margin-top:48px;color:var(--mute);font-size:.9rem}
+.tip{display:flex;align-items:center;gap:12px;justify-content:space-between;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 14px;margin:0 0 20px;font-size:.92rem;color:var(--mute)}
+.tip b{color:var(--ink)}
+@media (max-width:820px){.hero,.feat{grid-template-columns:1fr}.hero{gap:28px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><div class="logo"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="10" fill="var(--acc)"/><path d="M9 10l7 13 7-13" fill="none" stroke="var(--acc-ink)" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="8" r="2.6" fill="var(--acc-ink)"/></svg>ORVYXA AI</div></header>
+<main>
+<div class="tip" id="tip" hidden><span>Pour l’installer : touchez <b>Partager</b>, puis <b>Sur l’écran d’accueil</b>.</span><button class="chip" id="tipX" type="button">OK</button></div>
+<section class="hero">
+<div>
+<h1>Un assistant qui comprend, répond et avance avec vous.</h1>
+<p class="lead">ORVYXA AI répond à vos questions, rédige vos textes, explique ce que vous ne comprenez pas et vous aide à organiser vos idées. Essayez-le directement à droite.</p>
+<div class="chips" id="chips">
+<button class="chip">Explique-moi l’IA simplement</button>
+<button class="chip">Écris un message de relance poli</button>
+<button class="chip">Donne-moi 5 idées de projet</button>
+</div>
+<svg class="art" viewBox="0 0 460 220" role="img" aria-label="Illustration : des orbites autour d’un noyau"><g fill="none" stroke="var(--line)" stroke-width="1.5"><ellipse cx="230" cy="110" rx="200" ry="70"/><ellipse cx="230" cy="110" rx="140" ry="95" transform="rotate(-24 230 110)"/><ellipse cx="230" cy="110" rx="90" ry="40" transform="rotate(20 230 110)"/></g><circle cx="230" cy="110" r="30" fill="var(--acc)"/><path d="M217 102l13 22 13-22" stroke="var(--acc-ink)" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="430" cy="110" r="9" fill="var(--acc)"/><circle cx="30" cy="110" r="6" fill="var(--ink)"/><circle cx="315" cy="141" r="7" fill="var(--acc)"/><circle cx="191" cy="23" r="8" fill="var(--ink)"/></svg>
+<figure class="photo" id="photo" hidden><img id="photoImg" alt="Photo ORVYXA AI"></figure>
+<button class="chip" id="addPhoto" hidden>Ajouter une photo</button>
+<input type="file" id="photoFile" accept="image/*" hidden>
+</div>
+<div class="chat" aria-label="Discussion avec ORVYXA AI">
+<div class="msgs" id="msgs" aria-live="polite"><div class="m bot">Bonjour, je suis ORVYXA AI. Que puis-je faire pour vous ?</div></div>
+<div class="pv" id="pv" hidden><img id="pvImg" alt="Image jointe"><button class="chip" id="pvX" type="button">Retirer</button></div>
+<div class="bar"><button class="att" id="att" type="button" aria-label="Joindre une image" hidden>+</button><input id="q" placeholder="Écrivez ou glissez une image" autocomplete="off" aria-label="Votre message"><button id="send">Envoyer</button><input type="file" id="imgFile" accept="image/*" hidden></div>
+</div>
+</section>
+<section class="feat">
+<div><h2>Répond clairement</h2><p>Des réponses courtes, précises, dans la langue que vous utilisez.</p></div>
+<div><h2>Rédige pour vous</h2><p>Messages, résumés, descriptions : un premier jet prêt à relire.</p></div>
+<div><h2>Aide à décider</h2><p>Comparez des options et gardez ce qui compte vraiment.</p></div>
+</section>
+</main>
+<footer>© 2026 ORVYXA AI</footer>
+</div>
+<script>
+(function(){
+var msgs=document.getElementById('msgs'),q=document.getElementById('q'),btn=document.getElementById('send');
+var hist=[],busy=false,sample=null;
+var SYS="Tu es ORVYXA AI, un assistant intelligent présent sur un site web. Réponds dans la langue de l’utilisateur, de façon claire, utile et concise, sans mise en forme markdown. Si l’utilisateur joint une image, analyse-la en détail.\n\n";
+function add(c,t){var d=document.createElement('div');d.className='m '+c;d.textContent=t;msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;return d}
+var att=document.getElementById('att'),pv=document.getElementById('pv'),pvImg=document.getElementById('pvImg'),imgFile=document.getElementById('imgFile'),canImg=false,pending=null,lastImg=null;
+claude.use('sample').then(function(s){sample=s;if(s&&s.limits){s.limits().then(function(l){canImg=!!(l&&l.images);if(canImg)att.hidden=false}).catch(function(){})}}).catch(function(){});
+var fig=document.getElementById('photo'),pimg=document.getElementById('photoImg'),addB=document.getElementById('addPhoto'),pfile=document.getElementById('photoFile');
+function showPhoto(id){if(id){pimg.src='/_blob/'+id;fig.hidden=false}else{pimg.removeAttribute('src');fig.hidden=true}}
+claude.use('db').then(function(db){
+  if(!db)return;
+  var ref=db.doc('site/photo');
+  ref.onSnapshot(function(s){var d=s.exists&&s.data();showPhoto(d&&d.id)},function(){});
+  claude.use('assets').then(function(a){
+    if(!a)return;
+    addB.hidden=false;
+    addB.onclick=function(){pfile.click()};
+    pfile.onchange=async function(){
+      var f=pfile.files[0];if(!f)return;
+      addB.textContent='Envoi en cours…';
+      try{var r=await a.upload(f);await ref.set({id:r.id});showPhoto(r.id);addB.textContent='Changer la photo'}
+      catch(e){addB.textContent='Échec, réessayez'}
+    };
+  }).catch(function(){});
+}).catch(function(){});
+async function ask(text){
+  text=(text||'').trim();if((!text&&!pending)||busy)return;
+  if(!text)text='Analyse cette image.';
+  if(!sample){add('bot','Le chat n’est pas disponible dans cette vue. Rouvrez la page depuis claude.ai.');return}
+  busy=true;btn.disabled=true;q.value='';
+  var um=add('user',text);
+  if(pending){var im=document.createElement('img');im.alt='Image envoyée';im.src=URL.createObjectURL(pending);um.insertBefore(im,um.firstChild);lastImg=[pending];clearImg()}
+  hist.push({role:'user',content:text});
+  var out=add('bot','…');
+  var input=hist.map(function(m,i){return i===0?{role:'user',content:SYS+m.content}:m});
+  try{
+    var r=await sample(input,{cache:false,images:lastImg||undefined,onText:function(e){out.textContent=e.text;msgs.scrollTop=msgs.scrollHeight}});
+    out.textContent=r.text;hist.push({role:'assistant',content:r.text});
+  }catch(e){
+    hist.pop();
+    out.textContent=(e&&e.code==='not_granted')?'Autorisez la demande pour utiliser le chat.':(e&&e.code==='rate_limited')?'Trop de demandes. Réessayez dans un instant.':'Une erreur est survenue. Réessayez.';
+  }
+  busy=false;btn.disabled=false;q.focus();
+}
+btn.addEventListener('click',function(){ask(q.value)});
+async function setImg(f){
+  if(!f||!f.type||f.type.indexOf('image/')!==0||!canImg)return;
+  try{var bm=await createImageBitmap(f),s=Math.min(1,1600/Math.max(bm.width,bm.height)),c=document.createElement('canvas');c.width=Math.round(bm.width*s);c.height=Math.round(bm.height*s);c.getContext('2d').drawImage(bm,0,0,c.width,c.height);
+    var b=await new Promise(function(r){c.toBlob(r,'image/jpeg',.85)});pending=b||f}catch(e){pending=f}
+  pvImg.src=URL.createObjectURL(pending);pv.hidden=false;
+}
+function clearImg(){pending=null;pv.hidden=true;pvImg.removeAttribute('src');imgFile.value=''}
+att.onclick=function(){imgFile.click()};
+imgFile.onchange=function(){setImg(imgFile.files[0])};
+document.getElementById('pvX').onclick=clearImg;
+var chatEl=document.querySelector('.chat');
+['dragenter','dragover'].forEach(function(t){chatEl.addEventListener(t,function(e){e.preventDefault();chatEl.classList.add('drag')})});
+['dragleave','drop'].forEach(function(t){chatEl.addEventListener(t,function(e){e.preventDefault();chatEl.classList.remove('drag')})});
+chatEl.addEventListener('drop',function(e){setImg(e.dataTransfer.files[0])});
+q.addEventListener('paste',function(e){var f=e.clipboardData&&e.clipboardData.files[0];if(f)setImg(f)});
+q.addEventListener('keydown',function(e){if(e.key==='Enter')ask(q.value)});
+document.getElementById('chips').addEventListener('click',function(e){if(e.target.classList.contains('chip'))ask(e.target.textContent)});
+})();
+</script>
+<script>
+(function(){
+var ua=navigator.userAgent||'',ios=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+var std=navigator.standalone===true||(window.matchMedia&&matchMedia('(display-mode: standalone)').matches);
+var tip=document.getElementById('tip'),seen=false;
+try{seen=localStorage.getItem('orvyxa-tip')==='1'}catch(e){}
+if(ios&&!std&&!seen)tip.hidden=false;
+document.getElementById('tipX').onclick=function(){tip.hidden=true;try{localStorage.setItem('orvyxa-tip','1')}catch(e){}};
+})();
+</script>
+</body>
+</html>
